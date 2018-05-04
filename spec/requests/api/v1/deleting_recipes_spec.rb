@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Deleting Recipes', type: :request do
-  let!(:recipe) { FactoryBot.create(:recipe) }
+  let(:user) { FactoryBot.create(:user) }
+  let!(:recipe) { FactoryBot.create(:recipe, user: user) }
 
   context 'when record exists' do
     before { delete "/api/v1/recipes/#{recipe.id}" }

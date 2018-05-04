@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Listing Recipes', type: :request do
+  let(:user) { FactoryBot.create(:user) }
+
   describe 'GET /recipes' do
     let!(:list) { create_list }
     before {  get '/api//v1/recipes' }
@@ -16,7 +18,7 @@ RSpec.describe 'Listing Recipes', type: :request do
   end
 
   describe 'GET /recipes/:id' do
-    let(:recipe) { FactoryBot.create(:recipe) }
+    let(:recipe) { FactoryBot.create(:recipe, user: user) }
 
     context 'recipe with id exists' do
       before { get "/api/v1/recipes/#{recipe.id}" }
@@ -46,5 +48,6 @@ RSpec.describe 'Listing Recipes', type: :request do
 end
 
 def create_list
-  (1..3).each { FactoryBot.create(:recipe) }
+  user = FactoryBot.create(:user)
+  (1..3).each { FactoryBot.create(:recipe, user: user) }
 end

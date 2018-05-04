@@ -1,4 +1,5 @@
 class Api::V1::RecipesController < ApplicationController
+  before_action :set_user, only: [:create]
   before_action :set_recipe, only: [:show, :update, :destroy]
 
   def index
@@ -12,6 +13,7 @@ class Api::V1::RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = @user
     if @recipe.save
       json_response(@recipe, :created)
     else
@@ -40,5 +42,9 @@ class Api::V1::RecipesController < ApplicationController
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+
+  def set_user
+    @user = User.find(params[:user_id]) if params.key?(:user_id)
   end
 end

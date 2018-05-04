@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Updating Recipes', type: :request do
-  let!(:recipe) { FactoryBot.create(:recipe) }
+  let(:user) { FactoryBot.create(:user) }
+  let!(:recipe) { FactoryBot.create(:recipe, user: user) }
 
   describe 'PUT /api/v1/recipes/:id' do
     context 'valid request with correct parameters' do

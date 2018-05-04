@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating Recipes', type: :request do
+  let(:user) { FactoryBot.create(:user) }
+
   let(:valid_attributes) {
     { 
       name: 'Recipe 1',
       description: 'Simple Description',
       ingredients: ['Milk', 'Cheese', 'Tofu', 'Chicken'],
-      directions: ['Mix them together', 'Add spices', 'Cook until turn brown']
+      directions: ['Mix them together', 'Add spices', 'Cook until turn brown'],
+      user_id: user.id
     }
   }
 
