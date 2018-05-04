@@ -18,10 +18,29 @@ RSpec.describe 'Listing Recipes', type: :request do
   describe 'GET /recipes/:id' do
     let(:recipe) { FactoryBot.create(:recipe) }
 
-    before { get "/api/v1/recipes/#{recipe.id}" }
+    context 'recipe with id exists' do
+      before { get "/api/v1/recipes/#{recipe.id}" }
 
-    it 'list the correct resource' do
-      expect(json['id']).to eq recipe.id
+      it 'list the correct resource' do
+        expect(json).not_to be_empty
+        expect(json['id']).to eq recipe.id
+      end
+
+      it 'returns the 200 status' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'recipe does not exist' do
+      before { get '/api/v1/recipes/10' }
+
+      it 'return the 404 http code' do
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'returns the not found error code' do
+        expect(response.body).to match("Couldn't find Recipe with 'id'=10")
+      end
     end
   end
 end
