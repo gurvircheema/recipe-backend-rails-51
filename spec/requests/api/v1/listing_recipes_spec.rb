@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Listing Recipes', type: :request do
   let(:user) { FactoryBot.create(:user) }
+  let(:headers) { valid_headers }
 
   describe 'GET /recipes' do
     let!(:list) { create_list }
-    before {  get '/api//v1/recipes' }
+    before {  get '/api//v1/recipes', headers: headers }
 
     it 'list recipes' do
       expect(json).not_to be_empty
@@ -21,7 +22,7 @@ RSpec.describe 'Listing Recipes', type: :request do
     let(:recipe) { FactoryBot.create(:recipe, user: user) }
 
     context 'recipe with id exists' do
-      before { get "/api/v1/recipes/#{recipe.id}" }
+      before { get "/api/v1/recipes/#{recipe.id}", headers: headers }
 
       it 'list the correct resource' do
         expect(json).not_to be_empty
@@ -34,7 +35,7 @@ RSpec.describe 'Listing Recipes', type: :request do
     end
 
     context 'recipe does not exist' do
-      before { get '/api/v1/recipes/10' }
+      before { get '/api/v1/recipes/10', headers: headers }
 
       it 'return the 404 http code' do
         expect(response).to have_http_status(:not_found)

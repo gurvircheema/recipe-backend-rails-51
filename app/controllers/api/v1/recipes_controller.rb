@@ -1,7 +1,7 @@
 class Api::V1::RecipesController < ApplicationController
   before_action :set_user, only: [:create]
   before_action :set_recipe, only: [:show, :update, :destroy]
-
+  skip_before_action :authorize_request, only: [:index, :show]
   def index
     @recipes = Recipe.all 
     json_response(@recipes)

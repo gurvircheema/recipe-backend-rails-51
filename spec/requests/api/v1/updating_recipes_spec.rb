@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Updating Recipes', type: :request do
   let(:user) { FactoryBot.create(:user) }
   let!(:recipe) { FactoryBot.create(:recipe, user: user) }
+  let(:headers) { valid_headers }
 
   describe 'PUT /api/v1/recipes/:id' do
     context 'valid request with correct parameters' do
-      before { put "/api/v1/recipes/#{recipe.id}", params: { name: 'Updated'} }
+      before { put "/api/v1/recipes/#{recipe.id}", params: { name: 'Updated'}.to_json, headers: headers }
 
       it 'updates the recipe' do
         recipe.reload
@@ -19,7 +20,7 @@ RSpec.describe 'Updating Recipes', type: :request do
     end
 
     context 'invalid request' do
-      before { put "/api/v1/recipes/#{recipe.id}", params: { name: ''} }
+      before { put "/api/v1/recipes/#{recipe.id}", params: { name: ''}.to_json, headers: headers }
 
       it 'returns the error 422' do
         expect(response).to have_http_status(422)

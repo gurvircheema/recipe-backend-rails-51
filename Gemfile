@@ -7,6 +7,7 @@ end
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'jbuilder', '~> 2.5'
+gem 'jwt', '~> 1.5', '>= 1.5.4'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.5'
@@ -18,6 +19,7 @@ end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rb-readline'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

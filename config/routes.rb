@@ -4,4 +4,7 @@ Rails.application.routes.draw do
       resources :recipes
     end
   end
+
+  post '/auth/login', to: 'authentication#authenticate'
+  post '/signup', to: 'users#create'
 end
