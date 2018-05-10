@@ -19,6 +19,23 @@ RSpec.describe 'Updating Recipes', type: :request do
       end
     end
 
+    context 'uploading new images' do
+      before do
+        put "/api/v1/recipes/#{recipe.id}",
+          params: {pictures_data: [file_fixture('picture.txt').read]}.to_json,
+          headers: headers
+      end
+
+      it 'saves the new picture(s)' do
+        recipe.reload
+        expect(recipe.pictures.size).to eq 1
+      end
+
+      it 'returns the 204 status' do
+        expect(response).to have_http_status(204)
+      end
+    end
+
     context 'invalid request' do
       before { put "/api/v1/recipes/#{recipe.id}", params: { name: ''}.to_json, headers: headers }
 

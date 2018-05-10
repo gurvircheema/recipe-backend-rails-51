@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
+gem 'carrierwave', '~> 0.11.2'
+gem 'carrierwave-base64'
 gem 'jbuilder', '~> 2.5'
 gem 'jwt', '~> 1.5', '>= 1.5.4'
 gem 'pg', '>= 0.18', '< 2.0'
