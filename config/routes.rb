@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :recipes
+      resources :recipes do
+        post :search, on: :collection
+      end
       resources :pictures, only: [:destroy]
     end
   end

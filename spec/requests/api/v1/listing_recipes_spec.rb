@@ -52,5 +52,6 @@ end
 
 def create_list
   user = FactoryBot.create(:user)
+  Recipe.delete_all
   (1..3).each { FactoryBot.create(:recipe, user: user) }
 end

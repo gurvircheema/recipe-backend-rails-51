@@ -11,6 +11,7 @@ gem 'carrierwave-base64'
 gem 'jbuilder', '~> 2.5'
 gem 'jwt', '~> 1.5', '>= 1.5.4'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'pg_search'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.5'
 

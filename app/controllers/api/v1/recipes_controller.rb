@@ -40,6 +40,14 @@ class Api::V1::RecipesController < ApplicationController
     head :no_content
   end
 
+  def search
+    results = {}
+    if search_params.key?(:search_for)
+      results = Recipe.search_for(search_params[:search_for])
+    end
+    json_response(results)
+  end
+
   private
 
   def recipe_params
@@ -52,5 +60,9 @@ class Api::V1::RecipesController < ApplicationController
 
   def set_user
     @user = User.find(params[:user_id]) if params.key?(:user_id)
+  end
+
+  def search_params
+    params.permit(:search_for, :search_ingredients)
   end
 end
