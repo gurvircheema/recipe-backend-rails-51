@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         post :search, on: :collection
       end
       resources :pictures, only: [:destroy]
+      resources :comments, only: [:create, :destroy]
     end
   end
 

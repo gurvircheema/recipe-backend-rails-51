@@ -2,8 +2,11 @@ class Api::V1::RecipesController < ApplicationController
   before_action :set_user, only: [:create]
   before_action :set_recipe, only: [:show, :update, :destroy]
   skip_before_action :authorize_request, only: [:index, :show]
+
   def index
-    @recipes = Recipe.all
+    page = params.key?(:page) ? params[:page].to_i : 1
+    limit = params.key?(:limit) ? params[:limit].to_i : 10
+    @recipes = Recipe.limit(limit).offset((page - 1) * limit)
     json_response(@recipes)
   end
 
