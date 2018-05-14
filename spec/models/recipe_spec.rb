@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Recipe, type: :model do
   it { should belong_to(:user) }
   it { should have_many(:pictures) }
+  it { should have_many(:votes) }
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:description) }
   it { is_expected.to validate_presence_of(:ingredients) }

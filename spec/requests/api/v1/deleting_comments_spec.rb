@@ -6,9 +6,9 @@ RSpec.describe 'Deleting comments', type: :request do
   let(:comment) { FactoryBot.create(:comment, user: user, recipe: recipe) }
   let(:headers) { valid_headers }
 
-  describe 'DELETE /api/v1/comments/:id' do
+  describe 'DELETE /api/v1/recipes/:recipe_id/comments/:id' do
     context 'if comment actually exists' do
-      before { delete "/api/v1/comments/#{comment.id}", headers: headers }
+      before { delete "/api/v1/recipes/#{recipe.id}/comments/#{comment.id}", headers: headers }
 
       it 'should delete the comment' do
         expect { comment.reload }.to raise_error(ActiveRecord::RecordNotFound)

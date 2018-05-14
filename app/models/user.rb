@@ -3,4 +3,5 @@ class User < ApplicationRecord
   validates_presence_of :name, :email, :password_digest
   has_many :recipes
   has_many :comments
+  has_many :votes
 end

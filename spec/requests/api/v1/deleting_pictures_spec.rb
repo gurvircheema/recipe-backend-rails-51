@@ -6,8 +6,8 @@ RSpec.describe 'Deleting Pictures', type: :request do
   let(:picture) { FactoryBot.create(:picture, recipe: recipe) }
   let(:headers) { valid_headers }
 
-  describe 'DELETE /api/v1/pictures/:id' do
-    before { delete "/api/v1/pictures/#{picture.id}", headers: headers }
+  describe 'DELETE /api/v1/recipes/:recipe_id/pictures/:id' do
+    before { delete "/api/v1/recipes/#{recipe.id}/pictures/#{picture.id}", headers: headers }
 
     it 'should delete the picture' do
       expect(response).to have_http_status(204)

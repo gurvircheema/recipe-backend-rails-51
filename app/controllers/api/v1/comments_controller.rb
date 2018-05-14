@@ -1,5 +1,11 @@
 class Api::V1::CommentsController < ApplicationController
+  before_action :set_recipe
   before_action :set_comment, only: [:destroy]
+
+  def index
+    recipe = Recipe.find(params[:recipe_id])
+    json_response(recipe.comments)
+  end
 
   def create
     @comment = Comment.new(comment_params)
@@ -21,7 +27,11 @@ class Api::V1::CommentsController < ApplicationController
     params.permit(:body, :user_id, :recipe_id)
   end
 
+  def set_recipe
+    @recipe = Recipe.find(params[:recipe_id])
+  end
+
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = @recipe.comments.find(params[:id])
   end
 end
